@@ -1,0 +1,111 @@
+.bg-container {
+    background-color: rgb(110, 222, 54);
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 100vh;
+}
+.card-container {
+    background-color: white;
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.addInput-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input{
+    width: 80%;
+    padding: 5px;
+    border: 2px solid black;
+    margin-bottom: 5px;
+}
+.Add-button {
+    background-color: blue;
+    padding: 8px;
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-left: 5px;
+    width: 80%;
+}
+.main-heading {
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 32px;
+    color: green;
+}
+.text-section {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.button-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin-bottom: 10px;
+}
+.data-table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  background-color: antiquewhite;
+  padding: 5px;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 5px;
+}
+.data-table-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.id {
+  width: 10%;
+}
+.exit {
+  width: 20%;
+}
+.buttonSaveAndDelete{
+  width: 20%;
+}
+.Edit-button {
+  background-color: rgb(10, 73, 97);
+    padding: 8px;
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.save-button {
+  background-color: red;
+    padding: 8px;
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+}
