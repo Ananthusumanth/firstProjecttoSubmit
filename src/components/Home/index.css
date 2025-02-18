@@ -8,7 +8,7 @@
 }
 .card-container {
     background-color: white;
-    width: 90%;
+    width: 97%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -24,9 +24,12 @@
 }
 .input{
     width: 80%;
-    padding: 5px;
-    border: 2px solid black;
+    padding: 10px;
     margin-bottom: 5px;
+    background-color: rgb(142, 230, 142);
+    color: rgb(211, 182, 182);
+    border-radius: 10px;
+    border: none;
 }
 .Add-button {
     background-color: blue;
@@ -45,11 +48,23 @@
     font-weight: bold;
     font-size: 32px;
     color: green;
+    text-align: center;
 }
 .text-section {
     display: flex;
     flex-direction: column;
     width: 80%;
+}
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  color: red;
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 16px;
 }
 .button-section {
     display: flex;
@@ -58,14 +73,30 @@
     align-items: flex-start;
     width: 80%;
     margin-bottom: 10px;
+    color: white;
+}
+.table{
+  width: 80%;
+  background-color: green;
+  border-radius: 5px;
+  overflow-x: auto;
+  color: white;
 }
 .data-table {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
-  background-color: antiquewhite;
+  min-width: 95%;
+  padding: 5px;
+}
+.data-edit-table{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 95%;
+  background-color: rgb(162, 98, 13);
   padding: 5px;
   box-shadow: 2px 2px 2px black;
   border-radius: 5px;
@@ -77,35 +108,81 @@
   width: 100%;
 }
 .id {
-  width: 10%;
+  width: 20px;
+  height: 70PX;
+  border: 2px solid burlywood;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.exit {
-  width: 20%;
+.other{
+  width: 150px;
+  height: 70PX;
+  border: 2px solid burlywood;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
 }
-.buttonSaveAndDelete{
-  width: 20%;
+.extra {
+  width: 200px;
+  height: 70PX;
+  overflow-y: auto;
+  border: 2px solid burlywood;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  width: 80px;
+  height: 70PX;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .Edit-button {
   background-color: rgb(10, 73, 97);
-    padding: 8px;
-    font-family: Georgia;
-    font-weight: bold;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    margin-left: 5px;
-    cursor: pointer;
+  padding: 8px;
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+label {
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 2px;
+  color: rgb(34, 35, 32);
+}
+.delete-button {
+  background-color: red;
+  padding: 8px;
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
 }
 .save-button {
-  background-color: red;
-    padding: 8px;
-    font-family: Georgia;
-    font-weight: bold;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    margin-left: 5px;
-    cursor: pointer;
+  background-color: green;
+  padding: 8px;
+  font-family: Georgia;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
 }

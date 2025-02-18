@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {ThreeDots} from "react-loader-spinner"
+import Pagination from '../Pagination'
 import "./index.css"
 
 const apiResponseContent = {
@@ -18,10 +19,12 @@ const Home = () => {
     const [content, setcontent] = useState('')
     const [category, setcategory] = useState('')
     const [onEditbutton, setonEditButton] = useState(false)
-    const [id, setid] = useState('')
+    const [editid, setid] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(5)
     
     const getapiData = async () => {
-        const response = await fetch("https://login-50kc.onrender.com/note")
+        const response = await fetch("https://login-50kc.onrender.com/notes")
         const data = await response.json()
         if (response.ok){
             setResponse({apiData: data, status: apiResponseContent.success})
@@ -34,6 +37,13 @@ const Home = () => {
         setResponse({status: apiResponseContent.inProgress})
         getapiData()
     }, [])
+
+    const lastPostIndex = currentPage * postPerPage
+    const firstPostIndex = lastPostIndex - postPerPage
+    let currentPosts
+    if (response.apiData !== undefined && response.apiData !== null) {
+        currentPosts = response.apiData.slice(firstPostIndex, lastPostIndex)
+    }
 
     const onChangetitle = (event) => {
         settitle(event.target.value)
@@ -53,11 +63,9 @@ const Home = () => {
     }
 
     const onDelete = async (id) => {
-        const url = "https://login-50kc.onrender.com/note/delete"
-        const details = {id}
+        const url = `https://login-50kc.onrender.com/notes/${id}`
         const options = {
-            method: "DELETE",
-            body: JSON.stringify(details)
+            method: "DELETE"
         }
         const response = await fetch(url, options)
         await response.json()
@@ -65,8 +73,8 @@ const Home = () => {
     }
 
     const onSave = async () => {
-        const url = "https://login-50kc.onrender.com/save"
-        const details = {id, title, content, category}
+        const url = `https://login-50kc.onrender.com/notes/${editid}`
+        const details = {title, content, category}
         const options = {
             method: "PUT",
             headers: {
@@ -81,7 +89,7 @@ const Home = () => {
     }
 
     const add = async () => {
-        const url = "https://login-50kc.onrender.com/add"
+        const url = "https://login-50kc.onrender.com/notes"
         const details = {title, content, category}
         const options = {
             method: "POST",
@@ -109,28 +117,35 @@ const Home = () => {
 
     const successView = () => (
         <>
-        {response.apiData.length === 0 ? 
-        <div>Empty</div>
-        :
-        response.apiData.map((each) => {
-            return (
-                <div className='data-table' key={each.id}>
-                    <div className='data-table-text'>
-                        <p className='id'>{each.id}</p>
-                        <p className='id'>{each.title}</p>
-                        <p className='extra'>{each.content}</p>
-                        <p className='id'>{each.category}</p>
-                        <p className='extra'>{each.created_at}</p>
-                        <p className='extra'>{each.updated_at}</p>
-                    </div>
-                    <div className='buttonSaveAndDelete'>
-                        <button type='button' className='Edit-button' onClick={() => onEdit(each.id)}>Edit</button>
-                        <button type='buttton' className='save-button' onClick={() => onDelete(each.id)}>Delete</button>
-                    </div>
-                </div>
-            )
-        })
-        }
+        <table>
+            <tr className='data-table'>
+                <th className='id'>ID</th>
+                <th className='other'>TITLE</th>
+                <th className='extra'>CONTENT</th>
+                <th className='other'>CATEGORY</th>
+                <th className='extra'>CREATED_AT</th>
+                <th className='extra'>UPDATED_AT</th>
+                <th className='button'></th>
+                <th className='button'></th>
+            </tr>
+            { response.apiData.length === 0 ? <div className='empty'>Empty..........</div> :
+                currentPosts.map((each) => {
+                    const editedIDinprogress = each.id === editid ? "data-edit-table" : 'data-table'
+                    return (
+                        <tr className={editedIDinprogress} key={each.id}>
+                            <td className='id'>{each.id}</td>
+                            <td className='other'>{each.title}</td>
+                            <td className='extra'>{each.content}</td>
+                            <td className='other'>{each.category}</td>
+                            <td className='extra'>{each.created_at}</td>
+                            <td className='extra'>{each.updated_at}</td>
+                            <td className='button'><button type='button' className='Edit-button' onClick={() => onEdit(each.id)}>Edit</button></td>
+                            <td className='button'><button type='buttton' className='delete-button' onClick={() => onDelete(each.id)}>Delete</button></td>
+                        </tr>
+                    )
+                })
+            }
+        </table>
         </>
     )
 
@@ -147,6 +162,17 @@ const Home = () => {
                 return loadingview()
         }
     }
+
+    const totalpostsLength = () => {
+        if (
+          response.apiData === null ||
+          response.apiData === undefined ||
+          response.apiData.length === 0
+        ) {
+          return 1
+        }
+        return Math.ceil(response.apiData.length/postPerPage)
+      }
 
     return (
         <div className="bg-container">
@@ -182,14 +208,21 @@ const Home = () => {
                             <option>Study</option>
                             <option>others</option>
                         </select>
-                        {onEditbutton ? <button type="button" className="Add-button" onClick={onSave}>
+                        {onEditbutton ? <button type="button" className="save-button" onClick={onSave}>
                         Save
                         </button> : <button type="button" className="Add-button" onClick={add}>
                         Add
                         </button>}
                     </div>
                 </div>
-                {renderResponse()}
+                <div className='table'>
+                    {renderResponse()}
+                </div>
+                <Pagination 
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                    totalpages={totalpostsLength()}
+                />
             </div>
       </div>
     )
